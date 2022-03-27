@@ -1,0 +1,56 @@
+.body {
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+.base {
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.section {
+  position: relative;
+  width: 100%;
+  width: 23rem;
+
+  background-color: #ffffff;
+  padding: 2rem;
+  text-align: center;
+}
+
+.navLink {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.link {
+  display: grid;
+  align-items: center;
+  width: 100%;
+  height: 2rem;
+  padding: 0.1rem;
+  border: 1px solid #0c6860;
+  background-color: #119c91;
+  border-radius: 5px;
+  color: white;
+  text-decoration-line: none;
+}
+
+.button {
+  width: 100%;
+  height: 3rem;
+  margin-top: 2rem;
+  padding: 0 1rem;
+  outline: none;
+  border-radius: 4px;
+  border: 1px solid #119c91;
+  color: #119c91;
+  background-color: white;
+  user-select: none;
+}
+.button:hover {
+  color: white;
+  background-color: #119c91;
+}
