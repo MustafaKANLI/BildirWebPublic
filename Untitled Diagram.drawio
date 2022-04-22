@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-22T07:24:04.408Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="6Ou6FClM_t-udaAzJopr" version="17.4.6" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-22T08:24:31.232Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36" etag="dIuaQfGtPOEvle6lk__Q" version="17.4.6" type="github">
   <diagram id="6W1MyK6aDZMTI-PS_otd" name="Page-1">
     <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -394,7 +394,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="3DPTam1_xMa0_dKdHj1H-42" value="Convert from&lt;br&gt;Register to&lt;br&gt;Cancel Button" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-41">
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-42" value="Convert Button&lt;br&gt;from Register &lt;br&gt;to Cancel" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-41">
           <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
             <mxPoint y="29" as="offset" />
           </mxGeometry>
@@ -431,6 +431,184 @@
         </mxCell>
         <mxCell id="3DPTam1_xMa0_dKdHj1H-53" value="Register to Event Sequence Diagram:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=16;" vertex="1" parent="1">
           <mxGeometry x="53" y="830" width="317" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-54" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="919" y="890" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-55" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Verdana;startArrow=none;" edge="1" source="3DPTam1_xMa0_dKdHj1H-96" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="933.92" y="1560" as="sourcePoint" />
+            <mxPoint x="934" y="980" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-57" value="Event Page" style="rounded=1;whiteSpace=wrap;html=1;flipH=0;flipV=0;" vertex="1" parent="1">
+          <mxGeometry x="1114.5" y="890" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-58" value="Back-end" style="rounded=1;whiteSpace=wrap;html=1;flipH=0;flipV=0;" vertex="1" parent="1">
+          <mxGeometry x="1288.5" y="890" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-59" value="DB" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;flipH=0;flipV=0;" vertex="1" parent="1">
+          <mxGeometry x="1464.5" y="880" width="52.5" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-61" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Verdana;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;" edge="1" source="3DPTam1_xMa0_dKdHj1H-80" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1174.42" y="1560" as="sourcePoint" />
+            <mxPoint x="1174" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-62" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Verdana;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;" edge="1" source="3DPTam1_xMa0_dKdHj1H-92" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1348.42" y="1560" as="sourcePoint" />
+            <mxPoint x="1348" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-63" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Verdana;entryX=0.5;entryY=1;entryDx=0;entryDy=0;startArrow=none;" edge="1" source="3DPTam1_xMa0_dKdHj1H-94" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1490.67" y="1560" as="sourcePoint" />
+            <mxPoint x="1490.25" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-70" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="950" y="1100" as="sourcePoint" />
+            <mxPoint x="1160" y="1100" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-71" value="Visit Event Page" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-70">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint x="18" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-74" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1160" y="1140" as="sourcePoint" />
+            <mxPoint x="947" y="1140" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-75" value="Show Event Interface" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-74">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint x="-43" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-76" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="942.5" y="1200" as="sourcePoint" />
+            <mxPoint x="1160" y="1200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-77" value="Click Register Button" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-76">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint x="40" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-78" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1178.5" y="1230" as="sourcePoint" />
+            <mxPoint x="1338" y="1230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-79" value="User Informations" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-78">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint x="22" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-80" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.rect;fillColor2=none;strokeWidth=1;size=20;indent=5;fontFamily=Verdana;" vertex="1" parent="1">
+          <mxGeometry x="1164.5" y="1080" width="20" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-81" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Verdana;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" target="3DPTam1_xMa0_dKdHj1H-80" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1175" y="1500" as="sourcePoint" />
+            <mxPoint x="1174" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-82" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1348" y="1250" as="sourcePoint" />
+            <mxPoint x="1478" y="1250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-83" value="Update State" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-82">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint x="22" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-84" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1481" y="1290" as="sourcePoint" />
+            <mxPoint x="1358" y="1290" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-85" value="Success" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-84">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint x="-20" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-86" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1332" y="1300" as="sourcePoint" />
+            <mxPoint x="1186.5" y="1300" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-87" value="Success" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-86">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint x="-20" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-88" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1160" y="1320" as="sourcePoint" />
+            <mxPoint x="947" y="1320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-89" value="Success" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-88">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint x="-52" y="-3" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-90" value="" style="endArrow=classic;html=1;rounded=0;fontFamily=Verdana;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1158" y="1338" as="sourcePoint" />
+            <mxPoint x="1158" y="1398" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1098" y="1338" />
+              <mxPoint x="1098" y="1398" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-91" value="Convert Button &lt;br&gt;from Cancel &lt;br&gt;to Register" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontFamily=Verdana;" vertex="1" connectable="0" parent="3DPTam1_xMa0_dKdHj1H-90">
+          <mxGeometry x="-0.2933" y="1" relative="1" as="geometry">
+            <mxPoint y="29" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-92" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.rect;fillColor2=none;strokeWidth=1;size=20;indent=5;fontFamily=Verdana;" vertex="1" parent="1">
+          <mxGeometry x="1338.5" y="1210" width="20" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-93" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Verdana;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" target="3DPTam1_xMa0_dKdHj1H-92" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1350" y="1500" as="sourcePoint" />
+            <mxPoint x="1348" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-94" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.rect;fillColor2=none;strokeWidth=1;size=20;indent=5;fontFamily=Verdana;" vertex="1" parent="1">
+          <mxGeometry x="1479.5" y="1230" width="20" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-95" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Verdana;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" target="3DPTam1_xMa0_dKdHj1H-94" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1490" y="1500" as="sourcePoint" />
+            <mxPoint x="1490.25" y="970" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-96" value="" style="verticalLabelPosition=bottom;verticalAlign=top;html=1;shape=mxgraph.basic.rect;fillColor2=none;strokeWidth=1;size=20;indent=5;fontFamily=Verdana;" vertex="1" parent="1">
+          <mxGeometry x="924" y="1000" width="20" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-97" value="" style="endArrow=none;dashed=1;html=1;rounded=0;fontFamily=Verdana;" edge="1" target="3DPTam1_xMa0_dKdHj1H-96" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="934" y="1500" as="sourcePoint" />
+            <mxPoint x="934" y="980" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3DPTam1_xMa0_dKdHj1H-98" value="Cancel Registration to Event Sequence Diagram:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=16;" vertex="1" parent="1">
+          <mxGeometry x="890" y="830" width="430" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
