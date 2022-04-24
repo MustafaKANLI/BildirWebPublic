@@ -1,0 +1,31 @@
+StudentAccount -> 
+This class represents account of a student. It holds reference to followed
+communities.
+
+CommunityAccount -> 
+This class represents account of a community. It holds the CreationKey
+which is given by an administrator to be able to create a community.
+It also holds reference to student accounts which are following the community.
+
+AdministratorAccount ->
+This class represents account of an administrator. Administrators view the
+petitions to create a community account and if it is approved administrator
+sends a key to community. It also views the reports and solves them.
+
+Event -> 
+This class represents an event created by a community. It holds reference to
+images of the event and to the community account which it was created by.
+
+EventParticipation ->
+This class holds student and event pairs. For each event there is also a state
+which represents if student will participate or abandoned the event. It also holds
+a Liked boolean variable and it represents if the student liked that event or not.
+
+Report ->
+This class represents a report which is created by a student. In case of an event
+contains illegal, forbidden etc. content, students can report these events and 
+an administrator views these reports.
+
+Notification ->
+This class represents a notification sent to followers of a community by the 
+community.
