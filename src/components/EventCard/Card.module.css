@@ -1,0 +1,55 @@
+.card {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  border-radius: 1rem;
+  margin: 40px auto;
+  background-color: rgba(255, 255, 255);
+  border: 1px solid lightgrey;
+}
+.link {
+  color: black;
+  text-decoration: none !important;
+}
+
+.cardImage {
+  background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0) 60%,
+      rgb(255, 255, 255) 100%
+    ),
+    url("https://ironcodestudio.com/wp-content/uploads/2015/03/css-remove-horizontal-scrollbar.jpg")
+      no-repeat;
+  height: 200px;
+  background-size: 100% 200px;
+
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+.cardContent {
+  padding: 2rem 3rem;
+}
+.cardHeader {
+  margin-bottom: 2rem;
+}
+.cardDetail {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.cardDetailButton {
+  color: white;
+  background-color: #ad075c;
+  padding: 1rem 3rem;
+  border: 1px solid #ad075c;
+  border-radius: 0.5rem;
+}
+
+.cardDetailButton:hover {
+  color: #ad075c;
+  background-color: white;
+  cursor: pointer;
+}
