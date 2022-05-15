@@ -1,0 +1,40 @@
+.slideshow {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.mainImg {
+  transition: all 500ms !important;
+}
+
+.actions {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+.button {
+  background: rgba(0, 0, 0, 0.1);
+  border: none;
+  cursor: pointer;
+
+  border-radius: 15px;
+
+  display: flex !important;
+  justify-content: center;
+  align-items: center !important;
+  padding: 0.5rem;
+}
+
+.button:active {
+  background: rgba(0, 0, 0, 0.2);
+  border: none;
+  cursor: pointer;
+  border-radius: 15px;
+}

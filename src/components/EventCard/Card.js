@@ -3,6 +3,7 @@ import classes from "./Card.module.css";
 import { TiLocation } from "react-icons/ti";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import Button from "../Button/Button";
 
 const Card = () => {
   return (
@@ -30,7 +31,7 @@ const Card = () => {
                 Akdeniz Üniversitesi
               </div>
               <div>#Career#Summit</div>
-              <button className={classes.cardDetailButton}>Katıl</button>
+              <Button title="Katıl" />
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@
   margin: 40px auto;
   background-color: rgba(255, 255, 255);
   border: 1px solid lightgrey;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .link {
   color: black;
@@ -38,18 +39,4 @@
   justify-content: space-between;
   margin-top: 2rem;
   align-items: center;
-}
-
-.cardDetailButton {
-  color: white;
-  background-color: #ad075c;
-  padding: 1rem 3rem;
-  border: 1px solid #ad075c;
-  border-radius: 0.5rem;
-}
-
-.cardDetailButton:hover {
-  color: #ad075c;
-  background-color: white;
-  cursor: pointer;
 }
