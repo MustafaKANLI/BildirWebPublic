@@ -1,15 +1,13 @@
 import { Link } from "react-router-dom";
 import classes from "./Navbar.module.css";
+import Logo from "../../logo/logo_2.svg";
 
 const NavBar = (props) => {
   return (
     <header className={classes.header}>
       <div className={classes.navBar}>
         <Link to="/">
-          <img
-            className={classes.logo}
-            src="https://getir.com/_next/image?url=https%3A%2F%2Flanding-strapi-images-development.s3.eu-west-1.amazonaws.com%2Flogo_purple_e0b9221b8f.svg&w=128&q=75"
-          />
+          <img className={classes.logo} src={Logo} />
         </Link>
 
         <>

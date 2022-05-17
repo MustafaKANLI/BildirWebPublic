@@ -7,10 +7,16 @@ import { BsFillCalendarCheckFill } from "react-icons/bs";
 import EventDetails from "./EventDetails";
 import EventFlow from "./EventFlow";
 import Slideshow from "../../components/Slider/Slideshow";
+import ConfirmationPopUp from "../../components/PopUp/ConfirmationPopup";
+import Logo from "../../logo/logo_1.svg";
 
 const EventPage = () => {
   const [eventDetails, setEventDetails] = useState(true);
   const [eventFlow, setEventFlow] = useState(false);
+  const [isClickedRegisterButton, setIsClickedRegisterButton] = useState(false);
+
+  const [isRoleChangePopUpOpened, setIsRoleChangePopUpOpened] = useState(false);
+  const [userToChangeRole, setUserToChangeRole] = useState({});
 
   const eventDetailsTabClickHandler = () => {
     setEventDetails(true);
@@ -22,18 +28,26 @@ const EventPage = () => {
     setEventFlow(true);
   };
 
+  const buttonClickHandler = () => {
+    setIsClickedRegisterButton(true);
+    console.log("Clicked Button");
+  };
+
+  const changeRoleHandler = (data) => {
+    if (data !== undefined) {
+      console.log("Clicked");
+    }
+  };
+
   return (
     <div className={classes.eventPage}>
       <div className={classes.eventPageHeader}>
         <h1>Event Name</h1>
-        <Button title="Katıl" />
+        <Button title="Katıl" onClick={buttonClickHandler} />
       </div>
       <div className={classes.eventPageDetail}>
         <Link to="/">
-          <img
-            className={classes.logo}
-            src="https://getir.com/_next/image?url=https%3A%2F%2Flanding-strapi-images-development.s3.eu-west-1.amazonaws.com%2Flogo_purple_e0b9221b8f.svg&w=128&q=75"
-          />
+          <img className={classes.logo} src={Logo} />
         </Link>
         <div>
           <TiLocation />
@@ -74,6 +88,25 @@ const EventPage = () => {
           ]}
         />
       </div>
+      {isClickedRegisterButton && (
+        <ConfirmationPopUp
+          cancelOnClick={() => {
+            setIsRoleChangePopUpOpened(false);
+            setUserToChangeRole({});
+          }}
+          approveOnClick={() => {
+            changeRoleHandler(userToChangeRole);
+          }}
+          text={
+            <p>
+              {`Do you approve changing role for user ${userToChangeRole.user_name}`}
+              ?
+            </p>
+          }
+          confirmationBoxText={"I read and agree the responsible"}
+          title={"Delete User"}
+        />
+      )}
     </div>
   );
 };

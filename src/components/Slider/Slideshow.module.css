@@ -9,6 +9,7 @@
 
 .mainImg {
   transition: all 500ms !important;
+  width: 30rem;
 }
 
 .actions {
