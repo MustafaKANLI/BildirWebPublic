@@ -1,0 +1,39 @@
+.eventPage {
+  margin-top: 7rem;
+  padding: 0 3rem;
+}
+
+.eventPageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
+  padding: 1rem 0;
+}
+
+.eventPageDetail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.logo {
+  height: 2rem;
+}
+
+.eventTabs {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 3rem 0;
+  color: gray;
+}
+
+.tabHeading:hover {
+  color: rgb(78, 78, 78);
+  cursor: pointer;
+}
+
+.slider {
+  margin: 3rem 9rem;
+}

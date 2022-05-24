@@ -38,10 +38,10 @@
   cursor: text;
 }
 .form__input:focus {
-  border: 2px solid #119c91;
+  border: 2px solid #ad075c;
 }
 .form__input:focus ~ .form__label {
-  color: #119c91;
+  color: #ad075c;
 }
 .form__label {
   position: absolute;

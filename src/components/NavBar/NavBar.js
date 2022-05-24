@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import classes from "./Navbar.module.css";
 import Logo from "../../logo/logo_2.svg";
+import HomePage from "../../Pages/Home/HomePage";
 
 const NavBar = (props) => {
+  const location = useLocation().pathname;
+
+  const active = (url) => {
+    if (location.includes(url)) {
+      return classes.active;
+    }
+  };
+
   return (
     <header className={classes.header}>
       <div className={classes.navBar}>
@@ -11,7 +20,7 @@ const NavBar = (props) => {
         </Link>
 
         <>
-          <Link to="/events">
+          <Link to="/">
             <div className={`${classes.link}  `}>Events</div>
           </Link>
 
@@ -21,9 +30,9 @@ const NavBar = (props) => {
         </>
       </div>
       <div className={classes.profileBar}>
-        <Link to="/profile">
+        <Link to="/login">
           <div className={classes.profileName}>
-            <div className={classes.nameFont}>Mustafa</div>
+            <div className={classes.nameFont}>Login</div>
           </div>
         </Link>
       </div>

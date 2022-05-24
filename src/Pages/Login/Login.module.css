@@ -6,8 +6,9 @@
   overflow: auto;
 }
 .base {
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+  padding: 0 0 5px 0;
 }
 
 .section {
@@ -29,13 +30,17 @@
   display: grid;
   align-items: center;
   width: 100%;
-  height: 2rem;
+  height: 3rem;
   padding: 0.1rem;
-  border: 1px solid #0c6860;
-  background-color: #119c91;
-  border-radius: 5px;
+  border: 1px solid #ad075c;
+  background-color: #ad075c;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
   color: white;
   text-decoration-line: none;
+}
+
+.link:hover {
+  background-color: #7b0542;
 }
 
 .button {
@@ -45,12 +50,12 @@
   padding: 0 1rem;
   outline: none;
   border-radius: 4px;
-  border: 1px solid #119c91;
-  color: #119c91;
+  border: 1px solid #ad075c;
+  color: #ad075c;
   background-color: white;
   user-select: none;
 }
 .button:hover {
   color: white;
-  background-color: #119c91;
+  background-color: #ad075c;
 }

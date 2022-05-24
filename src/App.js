@@ -4,18 +4,20 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
 import HomePage from "./Pages/Home/HomePage";
 import EventPage from "./Pages/Event/EventPage";
-import CommunityPage from "./Pages/Community/CommunityPage";
+import CommunitiesPage from "./Pages/Community/CommunitiesPage/CommunitiesPage";
 import NavBar from "./components/NavBar/NavBar";
+import Community from "./Pages/Community/Community";
 
 function App() {
   return (
     <div>
       <NavBar />
       <Routes>
-        {/*<Route path="/login" element={<Login />} />*/}
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<HomePage />} />
-        <Route path="/event" element={<EventPage />} />
-        <Route path="/community" element={<CommunityPage />} />
+        <Route path="/event/*" element={<EventPage />} />
+        <Route path="/community" element={<Community />} />
+        <Route path="/communities" element={<CommunitiesPage />} />
       </Routes>
     </div>
   );

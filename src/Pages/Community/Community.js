@@ -1,43 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
-import classes from "./EventPage.module.css";
+import classes from "./Community.module.css";
 import { TiLocation } from "react-icons/ti";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
-import EventDetails from "./EventDetails";
-import EventFlow from "./EventFlow";
+import CommunityDetails from "./CommunityDetails";
 import Slideshow from "../../components/Slider/Slideshow";
 import Logo from "../../logo/logo_1.svg";
 
-const EventPage = () => {
-  const [eventDetails, setEventDetails] = useState(true);
-  const [eventFlow, setEventFlow] = useState(false);
-  const [event, setEvent] = useState({});
-  const location = useLocation().pathname.split("/").at(-1);
-  console.log(location);
-
-  const fetching = async () => {
-    const response = await fetch(
-      `http://127.0.0.1:11111/api/v1/Event/${location}`
-    );
-    const data = await response.json();
-    console.log(data);
-    setEvent(data.data);
-  };
-  useEffect(() => {
-    fetching();
-  }, []);
-
-  const eventDetailsTabClickHandler = () => {
-    setEventDetails(true);
-    setEventFlow(false);
-  };
-
-  const eventFlowTabClickHandler = () => {
-    setEventDetails(false);
-    setEventFlow(true);
-  };
-
+const Community = () => {
   const buttonClickHandler = () => {
     console.log("Clicked Button");
   };
@@ -45,7 +16,7 @@ const EventPage = () => {
   return (
     <div className={classes.eventPage}>
       <div className={classes.eventPageHeader}>
-        <h1>{event.title}</h1>
+        <h1>Girişimcilik ve Kariyer Topluluğu</h1>
         <Button title="Katıl" onClick={buttonClickHandler} />
       </div>
       <div className={classes.eventPageDetail}>
@@ -54,32 +25,13 @@ const EventPage = () => {
         </Link>
         <div>
           <TiLocation />
-          {event.location}
+          Akdeniz Üniversitesi
         </div>
-        <div>{event.tags}</div>
-        <div>
-          <BsFillCalendarCheckFill />
-          {event.date}
-        </div>
+        <div>#Career#Summit</div>
       </div>
 
-      {/* <div className={classes.eventTabs}>
-        <h2
-          className={classes.tabHeading}
-          onClick={eventDetailsTabClickHandler}
-        >
-          Event Details
-        </h2>
-        <hr></hr>
-        <h2 className={classes.tabHeading} onClick={eventFlowTabClickHandler}>
-          Event Flow
-        </h2>
-      </div> */}
+      <CommunityDetails></CommunityDetails>
 
-      <div>
-        {eventDetails && <EventDetails eventDetailText={event.description} />}
-      </div>
-      {/* <div>{eventFlow && <EventFlow eventFlowText={"asdasda"} />}</div> */}
       <div className={classes.slider}>
         <Slideshow
           imgs={[
@@ -97,4 +49,4 @@ const EventPage = () => {
   );
 };
 
-export default EventPage;
+export default Community;
