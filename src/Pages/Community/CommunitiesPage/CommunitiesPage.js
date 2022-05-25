@@ -3,27 +3,28 @@ import CommunityCard from "../../../components/Card/CommunityCard/CommunityCard"
 import classes from "./CommunitiesPage.module.css";
 
 const CommunityPage = () => {
-  const [events, setEvents] = useState([]);
+  const [communities, setCommunities] = useState([]);
 
   const fetching = async () => {
-    const response = await fetch("http://127.0.0.1:11111/api/v1/Community");
+    const response = await fetch(
+      "https://bildir.azurewebsites.net/api/v1/Community"
+    );
     const data = await response.json();
 
     console.log(data.data[0].title);
-    setEvents(data.data);
+    setCommunities(data.data);
   };
   useEffect(() => {
     fetching();
   }, []);
   return (
     <div className={classes.homePage}>
-      {events.map((e) => (
+      {communities.map((e) => (
         <CommunityCard
-          eventTitle={e.title}
+          cardTitle={e.name}
           key={e.id}
           id={e.id}
-          eventText={e.description}
-          location={e.location}
+          communityText={e.description}
           tags={e.tags}
           date={e.date}
         />

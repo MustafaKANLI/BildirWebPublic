@@ -18,25 +18,26 @@ const EventPage = () => {
 
   const fetching = async () => {
     const response = await fetch(
-      `http://127.0.0.1:11111/api/v1/Event/${location}`
+      `https://bildir.azurewebsites.net/api/v1/Event/${location}`
     );
     const data = await response.json();
     console.log(data);
     setEvent(data.data);
   };
+
   useEffect(() => {
     fetching();
   }, []);
 
-  const eventDetailsTabClickHandler = () => {
-    setEventDetails(true);
-    setEventFlow(false);
-  };
+  // const eventDetailsTabClickHandler = () => {
+  //   setEventDetails(true);
+  //   setEventFlow(false);
+  // };
 
-  const eventFlowTabClickHandler = () => {
-    setEventDetails(false);
-    setEventFlow(true);
-  };
+  // const eventFlowTabClickHandler = () => {
+  //   setEventDetails(false);
+  //   setEventFlow(true);
+  // };
 
   const buttonClickHandler = () => {
     console.log("Clicked Button");

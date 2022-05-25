@@ -6,13 +6,64 @@ import { Link } from "react-router-dom";
 import Button from "../../Button/Button";
 
 const EventCard = (props) => {
-  const joinButtonHandler = (e) => {
+  
+  const joinButtonHandler = async (e) => {
     e.stopPropagation();
-    alert("Etkinlige katildiniz");
     e.preventDefault();
+
+    try {
+      if (!localStorage.getItem("token")) console.error("Not logged in");
+      if (localStorage.getItem("role") !== "Student")
+        console.error("Only students can join");
+
+      const userResponse = await fetch(
+        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const userJson = await userResponse.json();
+      const userId = userJson.data.id;
+
+      console.log(userJson);
+
+      const registerResponse = await fetch(
+        "https://bildir.azurewebsites.net/api/v1/Student/RegisterToEvent",
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            eventId: props.id,
+            studentId: userId,
+          }),
+        }
+      );
+
+      const registerJson = await registerResponse.json();
+      console.log(registerJson);
+    } catch (ex) {
+      console.log(ex);
+    }
   };
 
   const eventCardClickHandler = (id) => {};
+
+  const button = () => {
+    if(props.state === "Active") {
+      if(!localStorage.getItem("token")) return (<Button title="Katıl" onClick={joinButtonHandler} />);
+
+      if(!props.participationState) return (<Button title="Katıl" onClick={joinButtonHandler} />);
+      if(props.participationState === "Participating") return (<Button title="İptal Et" onClick={joinButtonHandler} />);
+      if(props.participationState === "Abandoned") return (<Button title="Katıl" onClick={joinButtonHandler} />);
+
+    }
+  }
 
   return (
     <div onClick={eventCardClickHandler.bind(null, props.id)}>
@@ -33,6 +84,7 @@ const EventCard = (props) => {
                 {props.location}
               </div>
               <div>{props.tags}</div>
+
               <Button title="Katıl" onClick={joinButtonHandler} />
             </div>
           </div>

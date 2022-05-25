@@ -7,10 +7,12 @@ const HomePage = () => {
   const [events, setEvents] = useState([]);
 
   const fetching = async () => {
-    const response = await fetch("http://127.0.0.1:11111/api/v1/Event");
+    const response = await fetch(
+      "https://bildir.azurewebsites.net/api/v1/Event"
+    );
     const data = await response.json();
 
-    console.log(data.data[0].title);
+    console.log(data.data);
     setEvents(data.data);
   };
   useEffect(() => {
@@ -26,6 +28,7 @@ const HomePage = () => {
           eventTitle={e.title}
           key={e.id}
           id={e.id}
+          state={e.state}
           eventText={e.description}
           location={e.location}
           tags={e.tags}

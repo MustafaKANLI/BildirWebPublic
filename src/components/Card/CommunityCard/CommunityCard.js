@@ -11,25 +11,21 @@ const CommunityCard = (props) => {
     alert("Etkinlige katildiniz");
     e.preventDefault();
   };
-  const eventCardClickHandler = (id) => {};
+  const communityCardClickHandler = (id) => {};
   return (
-    <div onClick={eventCardClickHandler.bind(null, props.id)}>
-      <Link to="/community" className={classes.link}>
+    <div onClick={communityCardClickHandler.bind(null, props.id)}>
+      <Link to={`/community/${props.id}`} className={classes.link}>
         <div className={classes.card}>
           <div className={classes.cardImage}></div>
 
           <div className={classes.cardContent}>
-            <h1 className={classes.cardHeader}>{props.eventTitle}</h1>
-            <p>{props.eventText}</p>
+            <h1 className={classes.cardHeader}>{props.cardTitle}</h1>
+            <p>{props.communityText}</p>
             <div className={classes.cardDetail}>
-              <div>
-                <BsFillCalendarCheckFill />
-                {props.date}
-              </div>
-              <div>
+              {/* <div>
                 <TiLocation />
                 {props.location}
-              </div>
+              </div> */}
               <div>{props.tags}</div>
               <Button title="Katıl" onClick={joinButtonHandler} />
             </div>

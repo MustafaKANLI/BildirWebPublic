@@ -1,14 +1,30 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import classes from "./Community.module.css";
 import { TiLocation } from "react-icons/ti";
 import { BsFillCalendarCheckFill } from "react-icons/bs";
-import CommunityDetails from "./CommunityDetails";
 import Slideshow from "../../components/Slider/Slideshow";
 import Logo from "../../logo/logo_1.svg";
 
 const Community = () => {
+  const [community, setCommunity] = useState({});
+  const location = useLocation().pathname.split("/").at(-1);
+  console.log(location);
+
+  const fetching = async () => {
+    const response = await fetch(
+      `https://bildir.azurewebsites.net/api/v1/Community/${location}`
+    );
+    const data = await response.json();
+    console.log(data);
+    setCommunity(data.data);
+  };
+
+  useEffect(() => {
+    fetching();
+  }, []);
+
   const buttonClickHandler = () => {
     console.log("Clicked Button");
   };
@@ -16,21 +32,20 @@ const Community = () => {
   return (
     <div className={classes.eventPage}>
       <div className={classes.eventPageHeader}>
-        <h1>Girişimcilik ve Kariyer Topluluğu</h1>
+        <h1>{community.name}</h1>
         <Button title="Katıl" onClick={buttonClickHandler} />
       </div>
       <div className={classes.eventPageDetail}>
         <Link to="/">
           <img className={classes.logo} src={Logo} />
         </Link>
-        <div>
+        {/* <div>
           <TiLocation />
           Akdeniz Üniversitesi
-        </div>
-        <div>#Career#Summit</div>
+        </div> */}
+        {/* <div>{community.tags}</div> */}
       </div>
-
-      <CommunityDetails></CommunityDetails>
+      <div>{community.description}</div>
 
       <div className={classes.slider}>
         <Slideshow
