@@ -4,29 +4,56 @@ import classes from "./CommunitiesPage.module.css";
 
 const CommunityPage = () => {
   const [communities, setCommunities] = useState([]);
+  const [followingState, setfollowingState] = useState("");
 
   const fetching = async () => {
+    let followings = null;
+    if (localStorage.getItem("role") === "Student") {
+      const userResponse = await fetch(
+        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      const userJson = await userResponse.json();
+      followings = userJson.data.followedCommunities;
+      // console.log(followings);
+    }
+
     const response = await fetch(
       "https://bildir.azurewebsites.net/api/v1/Community"
     );
     const data = await response.json();
-
-    console.log(data.data[0].title);
+    if (followings) {
+      data.data.map((community) => {
+        const foundCommunity = followings.find(
+          (followedCommunity) => followedCommunity.id === +community.id
+        );
+        console.log(foundCommunity);
+        if (foundCommunity) community.followingState = "Followed";
+        else community.followingState = "Unfollowed";
+        return community;
+      });
+    }
     setCommunities(data.data);
   };
+
   useEffect(() => {
     fetching();
   }, []);
   return (
     <div className={classes.homePage}>
-      {communities.map((e) => (
+      {communities.map((c) => (
         <CommunityCard
-          cardTitle={e.name}
-          key={e.id}
-          id={e.id}
-          communityText={e.description}
-          tags={e.tags}
-          date={e.date}
+          cardTitle={c.name}
+          key={c.id}
+          id={c.id}
+          communityText={c.description}
+          followingState={c.followingState}
+          tags={c.tags}
+          date={c.date}
         />
       ))}
     </div>

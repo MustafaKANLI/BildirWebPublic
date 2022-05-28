@@ -7,6 +7,7 @@ import EventPage from "./Pages/Event/EventPage";
 import CommunitiesPage from "./Pages/Community/CommunitiesPage/CommunitiesPage";
 import NavBar from "./components/NavBar/NavBar";
 import Community from "./Pages/Community/Community";
+import Profile from "./Pages/Profile/Profile";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/event/*" element={<EventPage />} />
         <Route path="/community/*" element={<Community />} />
         <Route path="/communities" element={<CommunitiesPage />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
