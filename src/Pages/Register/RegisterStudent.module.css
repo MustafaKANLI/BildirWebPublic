@@ -8,13 +8,11 @@
 
 .section {
   position: relative;
-  width: 100%;
-  width: 23rem;
+  width: 50rem;
   background-color: #ffffff;
   padding: 2rem;
   text-align: center;
   border-radius: 10px;
-
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
 }
 .title {
@@ -80,4 +78,19 @@
   background-color: white;
   border: 1px solid #ad075c;
   color: #ad075c;
+}
+
+.inputGroup {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: left;
+}
+
+.inputGroup div {
+  width: 21.5rem;
+}
+
+.inputGroup div + div {
+  margin-left: 3rem;
 }

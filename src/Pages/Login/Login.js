@@ -72,6 +72,16 @@ const Login = (props) => {
             />
 
             <button className={classes.button}>Giriş</button>
+            <div className={classes.register}>
+              Kaydol:
+              <Link to="/studentregister" className={classes.registerLink}>
+                <span>Öğrenci</span>
+              </Link>
+              <span> / </span>
+              <Link to="/communityregister" className={classes.registerLink}>
+                <span>Topluluk</span>
+              </Link>
+            </div>
           </form>
         </section>
       </div>
