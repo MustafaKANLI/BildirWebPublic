@@ -26,8 +26,13 @@ const CommunityPage = () => {
       "https://bildir.azurewebsites.net/api/v1/Community"
     );
     const data = await response.json();
+    data.data = data.data.map((community) => {
+      community.followingState = "Unfollowed";
+      return community;
+    });
+
     if (followings) {
-      data.data.map((community) => {
+      data.data = data.data.map((community) => {
         const foundCommunity = followings.find(
           (followedCommunity) => followedCommunity.id === +community.id
         );

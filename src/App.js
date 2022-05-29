@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Login from "./Pages/Login/Login";
+import Logout from "./Pages/Logout/Logout";
 import HomePage from "./Pages/Home/HomePage";
 import EventPage from "./Pages/Event/EventPage";
 import CommunitiesPage from "./Pages/Community/CommunitiesPage/CommunitiesPage";
@@ -16,6 +17,7 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/" element={<HomePage />} />
         <Route path="/event/*" element={<EventPage />} />
         <Route path="/community/*" element={<Community />} />

@@ -4,8 +4,6 @@ import classes from "./Login.module.css";
 import Input from "../../components/Inputs/Input";
 
 const Login = (props) => {
-  const navigate = useNavigate();
-
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const navTo = useNavigate();
@@ -34,9 +32,9 @@ const Login = (props) => {
       if (json.succeeded) {
         localStorage.setItem("role", json.data.roles[0]);
         localStorage.setItem("token", json.data.jwToken);
-        navTo("/");
+        window.location.href = "http://" + window.location.host;
       } else {
-        console.log(json.Message);
+        console.log(json.message);
       }
     } catch (Ex) {
       // console.error(Ex);

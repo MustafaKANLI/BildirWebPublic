@@ -4,7 +4,6 @@ import classes from "./RegisterStudent.module.css";
 import Input from "../../components/Inputs/Input";
 
 const RegisterStudent = (props) => {
-  const navigate = useNavigate();
   const navTo = useNavigate();
 
   const emailInputRef = useRef();
@@ -44,8 +43,33 @@ const RegisterStudent = (props) => {
       const json = await response.json();
       console.log(json);
       if (json.succeeded) {
-        localStorage.setItem("role", json.data.roles[0]);
-        localStorage.setItem("token", json.data.jwToken);
+        try {
+          const response = await fetch(
+            "https://bildir.azurewebsites.net/api/Account/authenticate",
+            {
+              method: "POST",
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: emailInputRef.current.value,
+                password: passwordInputRef.current.value,
+              }),
+            }
+          );
+
+          const json = await response.json();
+          console.log(json);
+          if (json.succeeded) {
+            localStorage.setItem("role", json.data.roles[0]);
+            localStorage.setItem("token", json.data.jwToken);
+          } else {
+            console.log(json.Message);
+          }
+        } catch (Ex) {
+          // console.error(Ex);
+        }
         navTo("/");
       } else {
         console.log(json.Message);

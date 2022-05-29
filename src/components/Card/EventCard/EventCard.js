@@ -109,14 +109,16 @@ const EventCard = (props) => {
   const generateButton = () => {
     if (props.state === "Active") {
       if (!localStorage.getItem("token"))
-        <Link to="/login">
-          <Button title="Katıl" onClick={joinButtonHandler} />;
-        </Link>;
+        return (
+          <Link to="/login">
+            <Button title="Katıl" />
+          </Link>
+        );
 
       if (localStorage.getItem("role") !== "Student") return;
 
       if (!participationState || participationState === "Abandoned")
-        return <Button title="Katıl" onClick={joinButtonHandler} />; // redirect to login
+        return <Button title="Katıl" onClick={joinButtonHandler} />;
 
       if (participationState === "Participating")
         return <Button title="Ayrıl" onClick={leaveButtonHandler} />;

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Button from "../../Button/Button";
 
 const CommunityCard = (props) => {
-  const [followingState, setfollowingState] = useState("");
+  const [followingState, setfollowingState] = useState("Unfollowed");
 
   useEffect(() => {
     setfollowingState(props.followingState);
@@ -78,7 +78,7 @@ const CommunityCard = (props) => {
       const userId = userJson.data.id;
 
       const registerResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/AddFollowedCommunity",
+        "https://bildir.azurewebsites.net/api/v1/Student/RemoveFollowedCommunity",
         {
           method: "POST",
           headers: {
@@ -100,6 +100,7 @@ const CommunityCard = (props) => {
       console.log(ex);
     }
   };
+
   const communityCardClickHandler = (id) => {};
   return (
     <div onClick={communityCardClickHandler.bind(null, props.id)}>

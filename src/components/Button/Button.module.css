@@ -11,3 +11,11 @@
   background-color: white;
   cursor: pointer;
 }
+
+.buttonDisabled {
+  color: white;
+  background-color: rgba(173, 7, 93, 0.8);
+  padding: 1rem 3rem;
+  border: 1px solid rgba(173, 7, 93, 0.8);
+  border-radius: 0.5rem;
+}
