@@ -2,26 +2,25 @@ import React, { useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import classes from "./RegisterStudent.module.css";
 import Input from "../../components/Inputs/Input";
+import TextArea from "../../components/Inputs/TextArea";
 import Logo from "../../logo/logo_1.svg";
 
-const RegisterStudent = (props) => {
+const RegisterCommunity = (props) => {
   const navTo = useNavigate();
 
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const confirmPasswordInputRef = useRef();
-  const firstNameInputRef = useRef();
-  const lastNameInputRef = useRef();
-  const facultyInputRef = useRef();
-  const departmentInputRef = useRef();
-  const genderInputRef = useRef();
+  const userNameInputRef = useRef();
+  const creationKeyInputRef = useRef();
+  const descriptionInputRef = useRef();
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
     try {
       const response = await fetch(
-        "https://bildir.azurewebsites.net/api/Account/register-student",
+        "https://bildir.azurewebsites.net/api/Account/register-community",
         {
           method: "POST",
           headers: {
@@ -29,14 +28,12 @@ const RegisterStudent = (props) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            firstName: firstNameInputRef.current.value,
-            lastName: lastNameInputRef.current.value,
-            schoolEmail: emailInputRef.current.value,
-            faculty: facultyInputRef.current.value,
-            department: departmentInputRef.current.value,
-            gender: genderInputRef.current.value,
+            name: userNameInputRef.current.value,
+            email: emailInputRef.current.value,
             password: passwordInputRef.current.value,
             confirmPassword: confirmPasswordInputRef.current.value,
+            creationKey: creationKeyInputRef.current.value,
+            description: descriptionInputRef.current.value,
           }),
         }
       );
@@ -100,26 +97,15 @@ const RegisterStudent = (props) => {
               <div>
                 <Input
                   type="text"
-                  label="Ad"
-                  Iref={firstNameInputRef}
+                  label="Topluluk Adı"
+                  Iref={userNameInputRef}
                   height="8.2"
                 />
               </div>
               <div>
                 <Input
-                  type="text"
-                  label="Soyad"
-                  Iref={lastNameInputRef}
-                  height="8.2"
-                />
-              </div>
-            </div>
-
-            <div className={classes.inputGroup}>
-              <div>
-                <Input
-                  type="text"
-                  label="Okul Maili"
+                  type="email"
+                  label="E-mail"
                   Iref={emailInputRef}
                   height="8.2"
                 />
@@ -149,30 +135,18 @@ const RegisterStudent = (props) => {
               <div>
                 <Input
                   type="text"
-                  label="Fakülte"
-                  Iref={facultyInputRef}
-                  height="8.2"
-                />
-              </div>
-              <div>
-                <Input
-                  type="text"
-                  label="Bölüm"
-                  Iref={departmentInputRef}
+                  label="Mailinize gelen anahtar"
+                  Iref={creationKeyInputRef}
                   height="8.2"
                 />
               </div>
             </div>
 
-            <div className={classes.inputGroup}>
-              <div>
-                <Input
-                  type="text"
-                  label="Cinsiyet"
-                  Iref={genderInputRef}
-                  height="8.2"
-                />
-              </div>
+            <div className={classes.textArea}>
+              <TextArea
+                label="Profilinizde gösterilecek olan açıklama metninizi giriniz..."
+                Iref={descriptionInputRef}
+              />
             </div>
 
             <button className={classes.button}>Kayıt Ol</button>
@@ -188,4 +162,4 @@ const RegisterStudent = (props) => {
   );
 };
 
-export default RegisterStudent;
+export default RegisterCommunity;

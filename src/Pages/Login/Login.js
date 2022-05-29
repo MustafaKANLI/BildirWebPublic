@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import classes from "./Login.module.css";
 import Input from "../../components/Inputs/Input";
+import Logo from "../../logo/logo_1.svg";
 
 const Login = (props) => {
   const emailInputRef = useRef();
@@ -53,6 +54,8 @@ const Login = (props) => {
           </Link>
         </div> */}
         <section className={classes.section}>
+          <img className={classes.logo} src={Logo} />
+
           <h1 className={classes.title}>Login</h1>
           <form onSubmit={submitHandler}>
             <Input

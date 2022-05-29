@@ -10,6 +10,7 @@ import NavBar from "./components/NavBar/NavBar";
 import Community from "./Pages/Community/Community";
 import Profile from "./Pages/Profile/Profile";
 import RegisterStudent from "./Pages/Register/RegisterStudent";
+import RegisterCommunity from "./Pages/Register/RegisterCommunity";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/communities" element={<CommunitiesPage />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/studentregister" element={<RegisterStudent />} />
+        <Route path="/communityregister" element={<RegisterCommunity />} />
       </Routes>
     </div>
   );
