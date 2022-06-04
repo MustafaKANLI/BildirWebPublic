@@ -1,0 +1,46 @@
+.wrapper {
+  height: 100vh;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  margin: 0 10rem;
+  height: 40rem;
+  padding: 2rem;
+  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
+}
+
+.profile {
+  display: flex;
+  margin-bottom: 5rem;
+}
+
+.profileIcon {
+  font-size: 4rem;
+  margin-right: 1rem;
+}
+
+.link {
+  color: white;
+  background-color: #ad075c;
+  padding: 1rem 3rem;
+  border: 1px solid #ad075c;
+  border-radius: 0.5rem;
+  margin: 1rem;
+}
+
+.link:hover {
+  color: #ad075c;
+  background-color: white;
+  cursor: pointer;
+}
+
+.content {
+  margin: auto;
+}
+
+.content a {
+  text-decoration: none;
+}
