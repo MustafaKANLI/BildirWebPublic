@@ -14,6 +14,7 @@ import FollowedCommunities from "./Pages/Profile/Student/FollowedCommunities";
 import RegisterStudent from "./Pages/Register/RegisterStudent";
 import RegisterCommunity from "./Pages/Register/RegisterCommunity";
 import EventShare from "./Pages/Profile/Community/EventShare";
+import Events from "./Pages/Profile/Community/Events";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         />
 
         <Route path="/profile/shareEvent" element={<EventShare />} />
+        <Route path="/profile/organizedEvents" element={<Events />} />
 
         <Route path="/studentregister" element={<RegisterStudent />} />
         <Route path="/communityregister" element={<RegisterCommunity />} />
