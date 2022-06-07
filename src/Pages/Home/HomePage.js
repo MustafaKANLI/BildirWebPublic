@@ -8,6 +8,7 @@ const HomePage = () => {
 
   const fetching = async () => {
     let participations = null;
+    let followedCommunities = null;
     if (localStorage.getItem('role') === 'Student') {
       const userResponse = await fetch(
         'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
@@ -19,6 +20,7 @@ const HomePage = () => {
       );
       const userJson = await userResponse.json();
       participations = userJson.data.participatedEvents;
+      followedCommunities = userJson.data.followedCommunities;
     }
 
     const response = await fetch(
@@ -29,11 +31,42 @@ const HomePage = () => {
     let mappedEvents = data.data;
 
     if (participations)
-      mappedEvents = data.data.map((e) => {
-        let foundEvent = participations.find((p) => p.id === e.id);
-        if (foundEvent) e.participationState = foundEvent.participationState;
-        return e;
+      mappedEvents = data.data
+        .map((e) => {
+          let foundEvent = participations.find((p) => p.id === e.id);
+          if (foundEvent) e.participationState = foundEvent.participationState;
+          return e;
+        })
+        .map((e) => {
+          let foundCommunity = followedCommunities.find(
+            (c) => c.id === e.eventOf.id
+          );
+          if (foundCommunity) e.eventOfFollowedCommunity = true;
+          else e.eventOfFollowedCommunity = false;
+          return e;
+        })
+        .sort((e1, e2) => {
+          if (e1.state === 'Active' && e2.state !== 'Active') return -1;
+          else if (e1.state !== 'Active' && e2.state === 'Active') return 1;
+          else if (e1.state === 'Active' && e2.state === 'Active') {
+            if (e1.eventOfFollowedCommunity && !e2.eventOfFollowedCommunity)
+              return -1;
+            else if (
+              !e1.eventOfFollowedCommunity &&
+              e2.eventOfFollowedCommunity
+            )
+              return 1;
+            else return 0;
+          }
+        });
+
+    if (!localStorage.getItem('token')) {
+      mappedEvents = mappedEvents.sort((e1, e2) => {
+        if (e1.state === 'Active' && e2.state !== 'Active') return -1;
+        else if (e1.state !== 'Active' && e2.state === 'Active') return 1;
+        else if (e1.state === 'Active' && e2.state === 'Active') return 0;
       });
+    }
 
     setEvents(mappedEvents);
   };
@@ -44,19 +77,8 @@ const HomePage = () => {
   return (
     <div className={classes.homePage}>
       {events.map((e) => (
-        <EventCard
-          eventTitle={e.title}
-          key={e.id}
-          id={e.id}
-          state={e.state}
-          participationState={e.participationState}
-          eventText={e.description}
-          location={e.location}
-          tags={e.tags}
-          date={e.date}
-        />
+        <EventCard key={e.id} event={e} />
       ))}
-      {/* <EventCard eventTitle={"sada"} /> */}
     </div>
   );
 };

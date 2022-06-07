@@ -1,154 +1,149 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import Button from "../../components/Button/Button";
-import classes from "./Community.module.css";
-import { TiLocation } from "react-icons/ti";
-import { BsFillCalendarCheckFill } from "react-icons/bs";
-import Slideshow from "../../components/Slider/Slideshow";
-import Logo from "../../logo/logo_1.svg";
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import Button from '../../components/Button/Button';
+import classes from './Community.module.css';
+import { TiLocation } from 'react-icons/ti';
+import { BsFillCalendarCheckFill } from 'react-icons/bs';
+import Slideshow from '../../components/Slider/Slideshow';
+import Logo from '../../logo/logo_1.svg';
 
 const Community = () => {
-  const [community, setCommunity] = useState({});
-  const location = useLocation().pathname.split("/").at(-1);
-  const [followingState, setfollowingState] = useState("Unfollowed");
+  const location = useLocation();
 
-  const joinButtonHandler = async (e) => {
+  const [followingState, setFollowingState] = useState(
+    location.state.community.followingState ?? false
+  );
+
+  const followCommunity = async (e) => {
     e.stopPropagation();
     e.preventDefault();
 
     try {
-      if (!localStorage.getItem("token")) console.error("Not logged in");
-      if (localStorage.getItem("role") !== "Student")
-        console.error("Only students can join");
+      if (localStorage.getItem('role') !== 'Student')
+        console.error('Only students can follow');
 
       const userResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
+        'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
       const userJson = await userResponse.json();
       const userId = userJson.data.id;
 
-      const registerResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/AddFollowedCommunity",
+      const followResponse = await fetch(
+        'https://bildir.azurewebsites.net/api/v1/Student/AddfollowedCommunity',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            communityId: location,
+            communityId: location.state.community.id,
             studentId: userId,
           }),
         }
       );
 
-      const registerJson = await registerResponse.json();
-      console.log(registerJson);
-      setfollowingState("Followed");
+      const followJson = await followResponse.json();
+      if (!followJson.succeeded) throw new Error(followJson.message);
+      setFollowingState(true);
     } catch (ex) {
       console.log(ex);
     }
   };
 
-  const disJoinButtonHandler = async (e) => {
+  const unfollowCommunity = async (e) => {
     e.stopPropagation();
     e.preventDefault();
 
     try {
-      if (!localStorage.getItem("token")) console.error("Not logged in");
-      if (localStorage.getItem("role") !== "Student")
-        console.error("Only students can join");
+      if (!localStorage.getItem('token')) console.error('Not logged in');
+      if (localStorage.getItem('role') !== 'Student')
+        console.error('Only students can unfollow');
 
       const userResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
+        'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
       const userJson = await userResponse.json();
       const userId = userJson.data.id;
 
-      const registerResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/RemoveFollowedCommunity",
+      const unfollowResponse = await fetch(
+        'https://bildir.azurewebsites.net/api/v1/Student/RemoveFollowedCommunity',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            communityId: location,
+            communityId: location.state.community.id,
             studentId: userId,
           }),
         }
       );
 
-      const registerJson = await registerResponse.json();
-      console.log(registerJson);
-      setfollowingState("Unfollowed");
+      const unfollowJson = await unfollowResponse.json();
+      if (!unfollowJson.succeeded) throw new Error(unfollowJson.message);
+      setFollowingState(false);
     } catch (ex) {
       console.log(ex);
     }
-  };
-
-  const fetching = async () => {
-    const response = await fetch(
-      `https://bildir.azurewebsites.net/api/v1/Community/${location}`
-    );
-    const data = await response.json();
-    console.log(data);
-    setCommunity(data.data);
-  };
-
-  const buttonCreate = () => {
-    if (followingState === "Followed")
-      return <Button title="Takipten Çık" onClick={disJoinButtonHandler} />;
-    else return <Button title="Takip Et" onClick={joinButtonHandler} />;
   };
 
   useEffect(() => {
-    fetching();
+    setFollowingState(location.state.community.followingState ?? false);
   }, []);
 
-  const buttonClickHandler = () => {};
+  const generateContent = () => {
+    if (localStorage.getItem('role') !== 'Community') {
+      if (!localStorage.getItem('token')) {
+        return (
+          <Link to="/login">
+            <Button title="Takip Et" />
+          </Link>
+        );
+      }
+      return followingState ? (
+        <Button title="Takipten Çık" onClick={unfollowCommunity} />
+      ) : (
+        <Button title="Takip Et" onClick={followCommunity} />
+      );
+    }
+  };
 
   return (
     <div className={classes.eventPage}>
       <div className={classes.eventPageHeader}>
-        <h1>{community.name}</h1>
-        {buttonCreate()}
+        <h1>{location.state.community.name}</h1>
+        {generateContent()}
       </div>
       <div className={classes.eventPageDetail}>
         <Link to="/">
           <img className={classes.logo} src={Logo} />
         </Link>
-        {/* <div>
-          <TiLocation />
-          Akdeniz Üniversitesi
-        </div> */}
-        {/* <div>{community.tags}</div> */}
+        <div>{location.state.community.description}</div>
+        <div>{`E-Mail: ${location.state.community.email}`}</div>
+        <div>{`Events: ${location.state.community.organizedEvents.length}`}</div>
+        <div>{`Followers: ${location.state.community.followers.length}`}</div>
       </div>
-      <div>{community.description}</div>
 
       <div className={classes.slider}>
         <Slideshow
           imgs={[
-            "https://images.unsplash.com/photo-1585255318859-f5c15f4cffe9?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500",
-            "https://images.unsplash.com/photo-1584226761916-3fd67ab5ac3a?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500",
-            "https://images.unsplash.com/photo-1585179292338-45ba1f62f082?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500",
-            "https://images.unsplash.com/photo-1584753987666-ead137ec0614?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500",
-            "https://images.unsplash.com/photo-1584691267914-91c0bee55964?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500",
-            "https://images.unsplash.com/photo-1585084335487-f653d0859c14?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500",
-            "https://images.unsplash.com/photo-1583217874534-581393fd5325?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=500&ixlib=rb-1.2.1&q=80&w=500",
+            location.state.community.backgroundImage
+              ? `https://bildir.azurewebsites.net/${location.state.community.backgroundImage.path}`
+              : 'https://www.china-admissions.com/wp-content/uploads/2021/06/Divi-Community-Update-May-2020-scaled-1.jpeg',
           ]}
         />
       </div>

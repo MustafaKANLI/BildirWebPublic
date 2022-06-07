@@ -1,8 +1,10 @@
-import React, { useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import classes from "./RegisterStudent.module.css";
-import Input from "../../components/Inputs/Input";
-import Logo from "../../logo/logo_1.svg";
+import React, { useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import classes from './RegisterStudent.module.css';
+import Input from '../../components/Inputs/Input';
+import Logo from '../../logo/logo_1.svg';
+import { toast } from 'react-toastify';
+import { BiCamera } from 'react-icons/bi';
 
 const RegisterStudent = (props) => {
   const navTo = useNavigate();
@@ -19,14 +21,37 @@ const RegisterStudent = (props) => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    if (
+      !emailInputRef.current.value.trim() ||
+      !passwordInputRef.current.value.trim() ||
+      !confirmPasswordInputRef.current.value.trim() ||
+      !firstNameInputRef.current.value.trim() ||
+      !lastNameInputRef.current.value.trim() ||
+      !facultyInputRef.current.value.trim() ||
+      !departmentInputRef.current.value.trim() ||
+      !genderInputRef.current.value.trim()
+    ) {
+      toast.error('Lütfen tüm alanları doldurun', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      return;
+    }
+
     try {
       const response = await fetch(
-        "https://bildir.azurewebsites.net/api/Account/register-student",
+        'https://bildir.azurewebsites.net/api/Account/register-student',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             firstName: firstNameInputRef.current.value,
@@ -42,16 +67,16 @@ const RegisterStudent = (props) => {
       );
 
       const json = await response.json();
-      console.log(json);
+
       if (json.succeeded) {
         try {
           const response = await fetch(
-            "https://bildir.azurewebsites.net/api/Account/authenticate",
+            'https://bildir.azurewebsites.net/api/Account/authenticate',
             {
-              method: "POST",
+              method: 'POST',
               headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
               },
               body: JSON.stringify({
                 email: emailInputRef.current.value,
@@ -61,22 +86,31 @@ const RegisterStudent = (props) => {
           );
 
           const json = await response.json();
-          console.log(json);
+
           if (json.succeeded) {
-            localStorage.setItem("role", json.data.roles[0]);
-            localStorage.setItem("token", json.data.jwToken);
+            localStorage.setItem('role', json.data.roles[0]);
+            localStorage.setItem('token', json.data.jwToken);
           } else {
-            console.log(json.Message);
           }
         } catch (Ex) {
-          // console.error(Ex);
+          console.error(Ex);
         }
-        navTo("/");
+
+        toast.success('Kayıt başarıyla oluşturuldu', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        navTo('/');
       } else {
-        console.log(json.Message);
       }
     } catch (Ex) {
-      // console.error(Ex);
+      console.error(Ex);
     }
   };
 

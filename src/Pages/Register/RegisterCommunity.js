@@ -1,9 +1,11 @@
-import React, { useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import classes from "./RegisterStudent.module.css";
-import Input from "../../components/Inputs/Input";
-import TextArea from "../../components/Inputs/TextArea";
-import Logo from "../../logo/logo_1.svg";
+import React, { useRef, useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import classes from './RegisterStudent.module.css';
+import Input from '../../components/Inputs/Input';
+import TextArea from '../../components/Inputs/TextArea';
+import Logo from '../../logo/logo_1.svg';
+import { toast } from 'react-toastify';
+import { BiCamera } from 'react-icons/bi';
 
 const RegisterCommunity = (props) => {
   const navTo = useNavigate();
@@ -14,18 +16,41 @@ const RegisterCommunity = (props) => {
   const userNameInputRef = useRef();
   const creationKeyInputRef = useRef();
   const descriptionInputRef = useRef();
+  const fileRef = useRef();
+  const [images, setImages] = useState([]);
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    if (
+      !emailInputRef.current.value.trim() ||
+      !passwordInputRef.current.value.trim() ||
+      !confirmPasswordInputRef.current.value.trim() ||
+      !userNameInputRef.current.value.trim() ||
+      !creationKeyInputRef.current.value.trim() ||
+      !descriptionInputRef.current.value.trim()
+    ) {
+      toast.error('Lütfen tüm alanları doldurun', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      return;
+    }
+
     try {
-      const response = await fetch(
-        "https://bildir.azurewebsites.net/api/Account/register-community",
+      const registerResponse = await fetch(
+        'https://bildir.azurewebsites.net/api/Account/register-community',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             name: userNameInputRef.current.value,
@@ -38,56 +63,76 @@ const RegisterCommunity = (props) => {
         }
       );
 
-      const json = await response.json();
-      console.log(json);
-      if (json.succeeded) {
-        try {
-          const response = await fetch(
-            "https://bildir.azurewebsites.net/api/Account/authenticate",
+      const registerJson = await registerResponse.json();
+
+      if (registerJson.succeeded) {
+        if (images) {
+          const body = new FormData();
+          body.append('file', images[0], images[0].name);
+
+          const uploadResponse = await fetch(
+            `http://bildir.azurewebsites.net/api/v1/Community/AddBackgroundImage/${registerJson.data}`,
             {
-              method: "POST",
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                email: emailInputRef.current.value,
-                password: passwordInputRef.current.value,
-              }),
+              method: 'POST',
+              body,
             }
           );
-
-          const json = await response.json();
-          console.log(json);
-          if (json.succeeded) {
-            localStorage.setItem("role", json.data.roles[0]);
-            localStorage.setItem("token", json.data.jwToken);
-          } else {
-            console.log(json.Message);
-          }
-        } catch (Ex) {
-          // console.error(Ex);
+          const uploadJson = await uploadResponse.json();
         }
-        navTo("/");
+
+        const authResponse = await fetch(
+          'https://bildir.azurewebsites.net/api/Account/authenticate',
+          {
+            method: 'POST',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              email: emailInputRef.current.value,
+              password: passwordInputRef.current.value,
+            }),
+          }
+        );
+
+        const authJson = await authResponse.json();
+
+        if (authJson.succeeded) {
+          localStorage.setItem('role', authJson.data.roles[0]);
+          localStorage.setItem('token', authJson.data.jwToken);
+        } else {
+        }
+
+        toast.success('Kayıt başarıyla oluşturuldu', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
+        navTo('/');
       } else {
-        console.log(json.Message);
+        toast.error('Kayıt oluşturulurken bir hata meydana geldi', {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     } catch (Ex) {
-      // console.error(Ex);
+      console.error(Ex);
     }
   };
 
   return (
     <div className={classes.body}>
       <div className={classes.base}>
-        {/* <div className={classes.navLink}>
-          <Link to="/login" className={classes.link}>
-            Öğrenci
-          </Link>
-          <Link to="/login" className={classes.link}>
-            Topluluk
-          </Link>
-        </div> */}
         <section className={classes.section}>
           <img className={classes.logo} src={Logo} />
 
@@ -147,6 +192,26 @@ const RegisterCommunity = (props) => {
                 label="Profilinizde gösterilecek olan açıklama metninizi giriniz..."
                 Iref={descriptionInputRef}
               />
+            </div>
+            <div className={classes.fileSelectWrapper}>
+              <label htmlFor="imageselect">
+                <BiCamera className={classes.icon} />
+                <input
+                  id="imageselect"
+                  className={classes.fileSelector}
+                  type="file"
+                  ref={fileRef}
+                  accept="image/png, image/jpg"
+                  onChange={() => {
+                    setImages(Array.from(fileRef.current.files));
+                  }}
+                ></input>
+              </label>
+              <div>
+                {images.map((i, idx) => (
+                  <p key={idx}>{i.name}</p>
+                ))}
+              </div>
             </div>
 
             <button className={classes.button}>Kayıt Ol</button>

@@ -1,8 +1,8 @@
-import React from "react";
-import classes from "./Input.module.css";
+import React from 'react';
+import classes from './Input.module.css';
 
 const Input = (props) => {
-  document.documentElement.style.setProperty("--height", `${props.height}vh`);
+  document.documentElement.style.setProperty('--height', `${props.height}vh`);
 
   return (
     <div className={classes.input__div}>
@@ -11,8 +11,9 @@ const Input = (props) => {
         id={props.label}
         className={classes.form__input}
         autoComplete="off"
-        placeholder=" "
+        placeholder={props.placeholder ?? ''}
         onChange={props.onChange}
+        defaultValue={props.value ?? undefined}
         ref={props.Iref}
         style={{ borderColor: props.Icolor }}
       />

@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import classes from "./Login.module.css";
-import Input from "../../components/Inputs/Input";
-import Logo from "../../logo/logo_1.svg";
+import React, { useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import classes from './Login.module.css';
+import Input from '../../components/Inputs/Input';
+import Logo from '../../logo/logo_1.svg';
+import { toast } from 'react-toastify';
 
 const Login = (props) => {
   const emailInputRef = useRef();
@@ -12,14 +13,31 @@ const Login = (props) => {
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    if (
+      !emailInputRef.current.value.trim() ||
+      !passwordInputRef.current.value.trim()
+    ) {
+      toast.error('Lütfen tüm alanları doldurun', {
+        position: 'top-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
+      return;
+    }
+
     try {
       const response = await fetch(
-        "https://bildir.azurewebsites.net/api/Account/authenticate",
+        'https://bildir.azurewebsites.net/api/Account/authenticate',
         {
-          method: "POST",
+          method: 'POST',
           headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({
             email: emailInputRef.current.value,
@@ -29,13 +47,12 @@ const Login = (props) => {
       );
 
       const json = await response.json();
-      console.log(json);
+
       if (json.succeeded) {
-        localStorage.setItem("role", json.data.roles[0]);
-        localStorage.setItem("token", json.data.jwToken);
-        window.location.href = "http://" + window.location.host;
+        localStorage.setItem('role', json.data.roles[0]);
+        localStorage.setItem('token', json.data.jwToken);
+        window.location.href = 'http://' + window.location.host;
       } else {
-        console.log(json.message);
       }
     } catch (Ex) {
       // console.error(Ex);
@@ -45,29 +62,21 @@ const Login = (props) => {
   return (
     <div className={classes.body}>
       <div className={classes.base}>
-        {/* <div className={classes.navLink}>
-          <Link to="/login" className={classes.link}>
-            Öğrenci
-          </Link>
-          <Link to="/login" className={classes.link}>
-            Topluluk
-          </Link>
-        </div> */}
         <section className={classes.section}>
           <img className={classes.logo} src={Logo} />
 
-          <h1 className={classes.title}>Login</h1>
+          <h1 className={classes.title}>Giriş Yap</h1>
           <form onSubmit={submitHandler}>
             <Input
               type="text"
-              label="Username"
+              label="Kullanıcı adı"
               Iref={emailInputRef}
               height="8.2"
             />
 
             <Input
               type="password"
-              label="Password"
+              label="Şifre"
               Iref={passwordInputRef}
               height="8.2"
             />

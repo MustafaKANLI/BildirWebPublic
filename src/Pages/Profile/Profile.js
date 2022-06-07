@@ -1,30 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import classes from "./Profile.module.css";
-import { FaUserCircle } from "react-icons/fa";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import classes from './Profile.module.css';
+import { FaUserCircle } from 'react-icons/fa';
 
 const Profile = () => {
   const [user, setUser] = useState({});
 
   const fetching = async () => {
-    let participations = null;
-    if (localStorage.getItem("role") === "Student") {
+    if (localStorage.getItem('role') === 'Student') {
       const userResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
+        'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
       const userJson = await userResponse.json();
+
       setUser(userJson.data);
     } else {
       const userResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Community/CurrentlyLoggedIn",
+        'https://bildir.azurewebsites.net/api/v1/Community/CurrentlyLoggedIn',
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
           },
         }
       );
@@ -35,12 +35,11 @@ const Profile = () => {
   useEffect(() => {
     fetching();
   }, []);
-  console.log(user);
 
   return (
     <div className={classes.wrapper}>
       <div className={classes.section}>
-        {localStorage.getItem("role") === "Student" ? (
+        {localStorage.getItem('role') === 'Student' ? (
           <div>
             <div className={classes.profile}>
               <div className={classes.profileIcon}>

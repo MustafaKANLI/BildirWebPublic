@@ -1,129 +1,147 @@
-import React, { useState, useEffect } from "react";
-import classes from "./CommunityCard.module.css";
-import { TiLocation } from "react-icons/ti";
-import { BsFillCalendarCheckFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import Button from "../../Button/Button";
+import React, { useState, useEffect } from 'react';
+import classes from './CommunityCard.module.css';
+import { TiLocation } from 'react-icons/ti';
+import { BsFillCalendarCheckFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
+import Button from '../../Button/Button';
 
 const CommunityCard = (props) => {
-  const [followingState, setfollowingState] = useState("Unfollowed");
+  const [followingState, setFollowingState] = useState(
+    props.community.followingState ?? false
+  );
+
+  const followCommunity = async (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    try {
+      if (localStorage.getItem('role') !== 'Student')
+        console.error('Only students can follow');
+
+      const userResponse = await fetch(
+        'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      const userJson = await userResponse.json();
+      const userId = userJson.data.id;
+
+      const followResponse = await fetch(
+        'https://bildir.azurewebsites.net/api/v1/Student/AddfollowedCommunity',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            communityId: props.community.id,
+            studentId: userId,
+          }),
+        }
+      );
+
+      const followJson = await followResponse.json();
+      if (!followJson.succeeded) throw new Error(followJson.message);
+      setFollowingState(true);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
+
+  const unfollowCommunity = async (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    try {
+      if (!localStorage.getItem('token')) console.error('Not logged in');
+      if (localStorage.getItem('role') !== 'Student')
+        console.error('Only students can unfollow');
+
+      const userResponse = await fetch(
+        'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      const userJson = await userResponse.json();
+      const userId = userJson.data.id;
+
+      const unfollowResponse = await fetch(
+        'https://bildir.azurewebsites.net/api/v1/Student/RemoveFollowedCommunity',
+        {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            communityId: props.community.id,
+            studentId: userId,
+          }),
+        }
+      );
+
+      const unfollowJson = await unfollowResponse.json();
+      if (!unfollowJson.succeeded) throw new Error(unfollowJson.message);
+      setFollowingState(false);
+    } catch (ex) {
+      console.log(ex);
+    }
+  };
 
   useEffect(() => {
-    setfollowingState(props.followingState);
-    console.log(props.followingState);
+    setFollowingState(props.community.followingState ?? false);
   }, []);
 
-  const joinButtonHandler = async (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    try {
-      if (!localStorage.getItem("token")) console.error("Not logged in");
-      if (localStorage.getItem("role") !== "Student")
-        console.error("Only students can join");
-
-      const userResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
+  const generateContent = () => {
+    if (localStorage.getItem('role') !== 'Community') {
+      if (!localStorage.getItem('token')) {
+        return (
+          <Link to="/login">
+            <Button title="Takip Et" />
+          </Link>
+        );
+      }
+      return followingState ? (
+        <Button title="Takipten Çık" onClick={unfollowCommunity} />
+      ) : (
+        <Button title="Takip Et" onClick={followCommunity} />
       );
-      const userJson = await userResponse.json();
-      const userId = userJson.data.id;
-
-      const registerResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/AddFollowedCommunity",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            communityId: props.id,
-            studentId: userId,
-          }),
-        }
-      );
-
-      const registerJson = await registerResponse.json();
-      console.log(registerJson);
-      setfollowingState("Followed");
-    } catch (ex) {
-      console.log(ex);
     }
   };
 
-  const disJoinButtonHandler = async (e) => {
-    e.stopPropagation();
-    e.preventDefault();
-
-    try {
-      if (!localStorage.getItem("token")) console.error("Not logged in");
-      if (localStorage.getItem("role") !== "Student")
-        console.error("Only students can join");
-
-      const userResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      const userJson = await userResponse.json();
-      const userId = userJson.data.id;
-
-      const registerResponse = await fetch(
-        "https://bildir.azurewebsites.net/api/v1/Student/RemoveFollowedCommunity",
-        {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            communityId: props.id,
-            studentId: userId,
-          }),
-        }
-      );
-
-      const registerJson = await registerResponse.json();
-      console.log(registerJson);
-      setfollowingState("Unfollowed");
-    } catch (ex) {
-      console.log(ex);
-    }
-  };
-
-  const communityCardClickHandler = (id) => {};
   return (
-    <div onClick={communityCardClickHandler.bind(null, props.id)}>
-      <Link to={`/community/${props.id}`} className={classes.link}>
+    <div>
+      <Link
+        to={`/community/${props.community.id}`}
+        state={{ community: props.community }}
+        className={classes.link}
+      >
         <div className={classes.card}>
-          <div className={classes.cardImage}></div>
-
+          <img
+            src={
+              props.community.backgroundImage
+                ? `https://bildir.azurewebsites.net/${props.community.backgroundImage.path}`
+                : 'https://www.china-admissions.com/wp-content/uploads/2021/06/Divi-Community-Update-May-2020-scaled-1.jpeg'
+            }
+            className={classes.cardImage}
+            alt="communityImage"
+          ></img>
           <div className={classes.cardContent}>
             <h1 className={classes.cardHeader}>{props.cardTitle}</h1>
-            <p>{props.communityText}</p>
+            <p>{props.community.name}</p>
             <div className={classes.cardDetail}>
-              {/* <div>
-                <TiLocation />
-                {props.location}
-              </div> */}
-              <div>{props.tags}</div>
+              <div>{props.community.description}</div>
 
-              {followingState === "Followed" && (
-                <Button title="Takipten Çık" onClick={disJoinButtonHandler} />
-              )}
-              {followingState === "Unfollowed" && (
-                <Button title="Takip Et" onClick={joinButtonHandler} />
-              )}
+              {generateContent()}
             </div>
           </div>
         </div>
