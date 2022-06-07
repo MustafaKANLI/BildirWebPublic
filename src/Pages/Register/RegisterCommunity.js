@@ -71,7 +71,7 @@ const RegisterCommunity = (props) => {
           body.append('file', images[0], images[0].name);
 
           const uploadResponse = await fetch(
-            `http://bildir.azurewebsites.net/api/v1/Community/AddBackgroundImage/${registerJson.data}`,
+            `https://bildir.azurewebsites.net/api/v1/Community/AddBackgroundImage/${registerJson.data}`,
             {
               method: 'POST',
               body,

@@ -101,7 +101,7 @@ const EventShare = (props) => {
         images.forEach((p) => body.append('file', p, p.name));
 
         const uploadResponse = await fetch(
-          `http://bildir.azurewebsites.net/api/v1/Event/AddImagesToEvent/${createJson.data}`,
+          `https://bildir.azurewebsites.net/api/v1/Event/AddImagesToEvent/${createJson.data}`,
           {
             method: 'POST',
             body,

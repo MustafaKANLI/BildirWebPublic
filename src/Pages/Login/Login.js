@@ -51,11 +51,11 @@ const Login = (props) => {
       if (json.succeeded) {
         localStorage.setItem('role', json.data.roles[0]);
         localStorage.setItem('token', json.data.jwToken);
-        window.location.href = 'http://' + window.location.host;
+        window.location.href = 'https://' + window.location.host;
       } else {
       }
     } catch (Ex) {
-      // console.error(Ex);
+      console.error(Ex);
     }
   };
 
