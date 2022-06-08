@@ -1,95 +1,46 @@
-.body {
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
-}
-
-.content {
-  margin-top: 5rem;
-}
-
 .wrapper {
-  display: flex;
+  height: 100vh;
+  display: grid;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .section {
-  position: relative;
-  width: 100%;
-  width: 23rem;
-  background-color: #ffffff;
+  margin: 0 10rem;
+  height: 40rem;
   padding: 2rem;
-  text-align: center;
-  border-radius: 10px;
-
   box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
 }
-.title {
-  margin: 2rem 0;
+
+.profile {
+  display: flex;
+  margin-bottom: 5rem;
 }
 
-.navLink {
-  display: flex;
-  justify-content: center;
-  text-align: center;
+.profileIcon {
+  font-size: 4rem;
+  margin-right: 1rem;
 }
 
 .link {
-  display: grid;
-  align-items: center;
-  width: 100%;
-  height: 3rem;
-  padding: 0.1rem;
-  border: 1px solid #ad075c;
-  background-color: #ad075c;
-  box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.2);
   color: white;
-  text-decoration-line: none;
+  background-color: #ad075c;
+  padding: 1rem 3rem;
+  border: 1px solid #ad075c;
+  border-radius: 0.5rem;
+  margin: 1rem;
 }
 
 .link:hover {
-  background-color: #7b0542;
-}
-
-.button {
-  width: 100%;
-  height: 3rem;
-  margin-top: 2rem;
-  padding: 0 1rem;
-  outline: none;
-  border-radius: 4px;
-  border: 1px solid #ad075c;
   color: #ad075c;
   background-color: white;
-  user-select: none;
-}
-.button:hover {
-  color: white;
-  background-color: #ad075c;
+  cursor: pointer;
 }
 
-.register {
-  margin-top: 2rem;
-  font-weight: bold;
+.content {
+  margin: auto;
 }
 
-.registerLink {
-  margin: 0 0.5rem;
-  background-color: #ad075c;
-  border: 1px solid #ad075c;
-  color: white;
-  padding: 0.3rem 0.8rem;
-  border-radius: 50px;
-  text-decoration-line: none;
-  font-weight: lighter !important;
-}
-
-.registerLink:hover {
-  background-color: white;
-  border: 1px solid #ad075c;
-  color: #ad075c;
+.content a {
+  text-decoration: none;
 }

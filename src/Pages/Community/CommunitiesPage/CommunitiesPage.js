@@ -1,20 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import CommunityCard from '../../../components/Card/CommunityCard/CommunityCard';
-import classes from './CommunitiesPage.module.css';
+import React, { useState, useEffect } from "react";
+import CommunityCard from "../../../components/Card/CommunityCard/CommunityCard";
+import classes from "./CommunitiesPage.module.css";
 
 const CommunityPage = () => {
   const [communities, setCommunities] = useState([]);
-  const [followingState, setfollowingState] = useState('');
+  const [followingState, setfollowingState] = useState("");
 
   const fetching = async () => {
     try {
       let followedCommunities = null;
-      if (localStorage.getItem('role') === 'Student') {
+      if (localStorage.getItem("role") === "Student") {
         const userResponse = await fetch(
-          'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
+          "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
           {
             headers: {
-              Authorization: `Bearer ${localStorage.getItem('token')}`,
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           }
         );
@@ -23,7 +23,7 @@ const CommunityPage = () => {
       }
 
       const response = await fetch(
-        'https://bildir.azurewebsites.net/api/v1/Community'
+        "https://bildir.azurewebsites.net/api/v1/Community"
       );
 
       const data = await response.json();

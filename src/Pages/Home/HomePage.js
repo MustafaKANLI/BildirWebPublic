@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { BsDashCircleFill } from 'react-icons/bs';
-import EventCard from '../../components/Card/EventCard/EventCard';
-import classes from './HomePage.module.css';
+import React, { useState, useEffect } from "react";
+import { BsDashCircleFill } from "react-icons/bs";
+import EventCard from "../../components/Card/EventCard/EventCard";
+import classes from "./HomePage.module.css";
 
 const HomePage = () => {
   const [events, setEvents] = useState([]);
@@ -9,12 +9,12 @@ const HomePage = () => {
   const fetching = async () => {
     let participations = null;
     let followedCommunities = null;
-    if (localStorage.getItem('role') === 'Student') {
+    if (localStorage.getItem("role") === "Student") {
       const userResponse = await fetch(
-        'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
+        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
@@ -24,7 +24,7 @@ const HomePage = () => {
     }
 
     const response = await fetch(
-      'https://bildir.azurewebsites.net/api/v1/Event'
+      "https://bildir.azurewebsites.net/api/v1/Event"
     );
 
     const data = await response.json();
@@ -46,9 +46,9 @@ const HomePage = () => {
           return e;
         })
         .sort((e1, e2) => {
-          if (e1.state === 'Active' && e2.state !== 'Active') return -1;
-          else if (e1.state !== 'Active' && e2.state === 'Active') return 1;
-          else if (e1.state === 'Active' && e2.state === 'Active') {
+          if (e1.state === "Active" && e2.state !== "Active") return -1;
+          else if (e1.state !== "Active" && e2.state === "Active") return 1;
+          else if (e1.state === "Active" && e2.state === "Active") {
             if (e1.eventOfFollowedCommunity && !e2.eventOfFollowedCommunity)
               return -1;
             else if (
@@ -60,11 +60,11 @@ const HomePage = () => {
           }
         });
 
-    if (!localStorage.getItem('token')) {
+    if (!localStorage.getItem("token")) {
       mappedEvents = mappedEvents.sort((e1, e2) => {
-        if (e1.state === 'Active' && e2.state !== 'Active') return -1;
-        else if (e1.state !== 'Active' && e2.state === 'Active') return 1;
-        else if (e1.state === 'Active' && e2.state === 'Active') return 0;
+        if (e1.state === "Active" && e2.state !== "Active") return -1;
+        else if (e1.state !== "Active" && e2.state === "Active") return 1;
+        else if (e1.state === "Active" && e2.state === "Active") return 0;
       });
     }
 

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import classes from './CommunityCard.module.css';
-import { TiLocation } from 'react-icons/ti';
-import { BsFillCalendarCheckFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
-import Button from '../../Button/Button';
+import React, { useState, useEffect } from "react";
+import classes from "./CommunityCard.module.css";
+import { TiLocation } from "react-icons/ti";
+import { BsFillCalendarCheckFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
+import Button from "../../Button/Button";
 
 const CommunityCard = (props) => {
   const [followingState, setFollowingState] = useState(
@@ -15,14 +15,14 @@ const CommunityCard = (props) => {
     e.preventDefault();
 
     try {
-      if (localStorage.getItem('role') !== 'Student')
-        console.error('Only students can follow');
+      if (localStorage.getItem("role") !== "Student")
+        console.error("Only students can follow");
 
       const userResponse = await fetch(
-        'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
+        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
@@ -30,13 +30,13 @@ const CommunityCard = (props) => {
       const userId = userJson.data.id;
 
       const followResponse = await fetch(
-        'https://bildir.azurewebsites.net/api/v1/Student/AddfollowedCommunity',
+        "https://bildir.azurewebsites.net/api/v1/Student/AddfollowedCommunity",
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             communityId: props.community.id,
@@ -58,15 +58,15 @@ const CommunityCard = (props) => {
     e.preventDefault();
 
     try {
-      if (!localStorage.getItem('token')) console.error('Not logged in');
-      if (localStorage.getItem('role') !== 'Student')
-        console.error('Only students can unfollow');
+      if (!localStorage.getItem("token")) console.error("Not logged in");
+      if (localStorage.getItem("role") !== "Student")
+        console.error("Only students can unfollow");
 
       const userResponse = await fetch(
-        'https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn',
+        "https://bildir.azurewebsites.net/api/v1/Student/CurrentlyLoggedIn",
         {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
       );
@@ -74,13 +74,13 @@ const CommunityCard = (props) => {
       const userId = userJson.data.id;
 
       const unfollowResponse = await fetch(
-        'https://bildir.azurewebsites.net/api/v1/Student/RemoveFollowedCommunity',
+        "https://bildir.azurewebsites.net/api/v1/Student/RemoveFollowedCommunity",
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('token')}`,
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Accept: "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             communityId: props.community.id,
@@ -102,8 +102,8 @@ const CommunityCard = (props) => {
   }, []);
 
   const generateContent = () => {
-    if (localStorage.getItem('role') !== 'Community') {
-      if (!localStorage.getItem('token')) {
+    if (localStorage.getItem("role") !== "Community") {
+      if (!localStorage.getItem("token")) {
         return (
           <Link to="/login">
             <Button title="Takip Et" />
@@ -130,13 +130,13 @@ const CommunityCard = (props) => {
             src={
               props.community.backgroundImage
                 ? `https://bildir.azurewebsites.net/${props.community.backgroundImage.path}`
-                : 'https://www.china-admissions.com/wp-content/uploads/2021/06/Divi-Community-Update-May-2020-scaled-1.jpeg'
+                : "https://www.china-admissions.com/wp-content/uploads/2021/06/Divi-Community-Update-May-2020-scaled-1.jpeg"
             }
             className={classes.cardImage}
             alt="communityImage"
           ></img>
           <div className={classes.cardContent}>
-            <h1 className={classes.cardHeader}>{props.cardTitle}</h1>
+            <h1 className={classes.cardHeader}>{props.community.name}</h1>
             <p>{props.community.name}</p>
             <div className={classes.cardDetail}>
               <div>{props.community.description}</div>
