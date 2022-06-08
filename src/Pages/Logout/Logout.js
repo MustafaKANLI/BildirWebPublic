@@ -8,7 +8,6 @@ const Logout = () => {
 
   useEffect(() => {
     window.location.href = 'https://' + window.location.host;
-    //navTo("/");
   }, []);
   return <></>;
 };

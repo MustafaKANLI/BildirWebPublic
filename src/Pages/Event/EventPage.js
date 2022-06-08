@@ -237,6 +237,7 @@ const EventPage = (props) => {
         <Link to="/">
           <img className={classes.logo} src={Logo} />
         </Link>
+        <p>{`@ ${location.state.event.eventOf.name}`}</p>
         <div>
           <TiLocation />
           {location.state.event.location}

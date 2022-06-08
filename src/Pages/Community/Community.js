@@ -14,6 +14,8 @@ const Community = () => {
     location.state.community.followingState ?? false
   );
 
+  console.log(location.state.community);
+
   const followCommunity = async (e) => {
     e.stopPropagation();
     e.preventDefault();
@@ -134,8 +136,14 @@ const Community = () => {
         </Link>
         <div>{location.state.community.description}</div>
         <div>{`E-Mail: ${location.state.community.email}`}</div>
-        <div>{`Events: ${location.state.community.organizedEvents.length}`}</div>
-        <div>{`Followers: ${location.state.community.followers.length}`}</div>
+        <div>
+          {location.state.community.organizedEvents &&
+            `Events: ${location.state.community.organizedEvents?.length}`}
+        </div>
+        <div>
+          {location.state.community.followers &&
+            `Followers: ${location.state.community.followers?.length}`}
+        </div>
       </div>
 
       <div className={classes.slider}>

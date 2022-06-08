@@ -53,6 +53,15 @@ const Login = (props) => {
         localStorage.setItem('token', json.data.jwToken);
         window.location.href = 'https://' + window.location.host;
       } else {
+        toast.error(json.message, {
+          position: 'top-right',
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       }
     } catch (Ex) {
       console.error(Ex);

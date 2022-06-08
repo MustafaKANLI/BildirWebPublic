@@ -19,6 +19,7 @@ const Events = () => {
     setEvents(
       userJson.data.organizedEvents.map((e) => {
         e.isEditable = true;
+        e.eventOf = { name: userJson.data.name };
         return e;
       })
     );
